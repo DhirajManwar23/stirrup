@@ -9,19 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "fullpage.js": "^4.0.31",
-    "next": "^15.3.2",
-    "next-sanity": "^2.1.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-portable-text": "^0.6.0",
-    "swiper": "^11.2.1"
+    "fullpage.js": "4.0.31",
+    "next": "13.4.19",
+    "next-sanity": "2.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-portable-text": "0.6.0",
+    "swiper": "11.2.1"
   },
   "devDependencies": {
-    "@types/fullpage.js": "^2.9.6",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "typescript": "^5"
+    "@types/fullpage.js": "2.9.6",
+    "@types/node": "20.0.0",
+    "@types/react": "18.2.19",
+    "@types/react-dom": "18.2.15",
+    "typescript": "5.4.5"
   }
 }
