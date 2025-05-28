@@ -4,7 +4,7 @@ import { createClient } from "next-sanity";
 import 'fullpage.js/dist/fullpage.css';
 import { useEffect, useState } from "react";
 import Swiper from 'swiper';
-import '../public/css/swiper-bundle.css';
+
 
 interface HomeProps {
   Loadword: any;
