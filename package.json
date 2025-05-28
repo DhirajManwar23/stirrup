@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-     "dev": "sanity dev",
+    "dev": "sanity dev",
     "build": "sanity build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "fullpage.js": "^4.0.31",
-    "next": "15.1.4",
-    "next-sanity": "^9.8.33",
+    "next": "^15.3.2",
+    "next-sanity": "^2.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-portable-text": "^0.6.0",
