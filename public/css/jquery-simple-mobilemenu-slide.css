@@ -1,0 +1,80 @@
+/*
+JQuery Simple MobileMenu Slide
+https://github.com/Position2/jQuery-Simple-MobileMenu
+*/
+/*Main style*/
+body.mmactive {  overflow: hidden;}
+.mobile_menu {  display: none;  position: relative;	padding: 0 20px;}
+.sm_menu_outer.active .mobile_menu {  display: block;}
+.sm_menu_outer {overflow-y: scroll;overflow-x: hidden;position: fixed;top: 80px;right: 0;bottom: 0;z-index: -9;width: 100%;opacity: 0;background-color: #0A0A5F;-webkit-transition: opacity 0.2s;-moz-transition: opacity 0.2s;transition: opacity 0.2s;}
+.sm_menu_outer.active {opacity: 1;z-index: 999;}
+.sm_menu_outer .mobile_menu li.back a {padding: 20px 15px;}
+.sm_menu_outer .mobile_menu li a:after {content: "\e900";font-family: 'icomoon' !important; color: #307FE2; display: inline-block; float: right; font-size: 20px; color: #fff;}
+.sm_menu_outer .mobile_menu li.back a:before{content: "\e901";font-family: 'icomoon' !important; color: #307FE2; display: inline-block; font-size: 20px; margin-right: 10px; vertical-align: middle; transform:rotate(180deg); background: #fff; width: 30px;height: 30px; text-indent: 5px; line-height: 1.4; border-radius: 50px;}
+.sm_menu_outer .mobile_menu li.back a:after{content: none;}
+.sm_menu_outer .mobile_menu a {color: #ffffff;display: block;font: 300 14px/140% "Lato", sans-serif;letter-spacing: 1px;padding: 20px 15px;text-transform: uppercase;text-decoration: none;}
+
+/*Sub Menu anim */
+.sm_menu_outer.slide .mobile_menu .submenu {background-color: #0a0a4a; height: calc(100vh - 80px);position: absolute;right: -100%;top: 0;transition: all 0.5s ease 0s;width: 100%;z-index: 999;padding: 0 20px;}
+.sm_menu_outer.slide .mobile_menu li.active > .submenu {right: 0;}
+.sm_menu_outer .mobile_menu li {list-style-type: none;border-bottom: 0.5px solid #304276;color: #ffffff;}
+.sm_menu_outer.slide .mobile_menu li.hasChild > a {}
+.sm_menu_outer.slide .mobile_menu li.hasChild > a:after{content: "\e901";font-family: 'icomoon' !important; color: #307FE2; display: inline-block; float: right; font-size: 20px; color: #fff;}
+
+/*Hamburger Animation */
+#sm_menu_ham {cursor: pointer;float: right;height: 25px;position: fixed;right: 5px;-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);transform: rotate(0deg);-webkit-transition: all 0.5s ease-in-out 0s;-moz-transition: all 0.5s ease-in-out 0s;-o-transition: all 0.5s ease-in-out 0s;transition: all 0.5s ease-in-out 0s;width: 30px;top: 29px;right: 15px;z-index: 9999;}
+#sm_menu_ham span {background-color: #FFFFFF;border-radius: 0px;display: block;height: 2px;left: 0;opacity: 1;position: absolute;-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);transform: rotate(0deg);-webkit-transition: all 0.25s ease-in-out 0s;-moz-transition: all 0.25s ease-in-out 0s;-o-transition: all 0.25s ease-in-out 0s;transition: all 0.25s ease-in-out 0s;width: 30px;}
+#sm_menu_ham span:nth-child(1) { top: 0;}
+#sm_menu_ham span:nth-child(2),
+#sm_menu_ham span:nth-child(3) { top: 10px;}
+#sm_menu_ham span:nth-child(4) { top: 20px;}
+#sm_menu_ham.open span:nth-child(1) { left: 50%; top: 18px; width: 0;}
+#sm_menu_ham.open span:nth-child(2) {  -webkit-transform: rotate(45deg);  -moz-transform: rotate(45deg);  transform: rotate(45deg);}
+#sm_menu_ham.open span:nth-child(3) {  -webkit-transform: rotate(-45deg);  -moz-transform: rotate(-45deg);  transform: rotate(-45deg);}
+#sm_menu_ham.open span:nth-child(4) { left: 50%; top: 18px; width: 0;}
+
+@media (min-width: 1024px) {
+  #sm_menu_ham,
+  .sm_menu_outer { display: none; }
+}
+
+@media (min-width:  993px) {
+	.mobile_menu{display:flex; flex-wrap: wrap;font-size: 1em;}
+	.mobile_menu li a{padding: 5px 15px;  color: #000; display: block;}
+	.mobile_menu li{position: relative; }
+	.mobile_menu li ul.submenu{position: absolute;left: 50% !important;margin-left: auto;transform: translateX(-50%);top: 60px !important;padding: 15px 1.5em 10px 1.5em;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;z-index: 1000;display: none; min-width: 20em !important;margin: .125rem 0 0; background: #fff;}	
+  .mobile_menu li ul.submenu:before {content: "";position: absolute;top: -8px;left: 50%;transform: translateX(-50%);width: 0;height: 0;border-style: solid;border-width: 0 10px 8px 10px;border-color: transparent transparent #fff transparent;}
+	.mobile_menu li ul.submenu li a{display: block; width: 100%; position: relative;border-bottom: 0.5px solid #fff;}
+	.mobile_menu li ul.submenu li a:before{content: "\e900";font-family: 'icomoon' !important;color: #307FE2;position: absolute;right: 20px;top: 5px;transition: all ease .4s;}
+	.mobile_menu li ul.submenu li a:hover{border-bottom: 0.5px solid #a0cbff;}
+	.mobile_menu li ul.submenu li a:hover:before{right: 5px;}
+	.mobile_menu li ul.submenu li ul.submenu{display: none; top: 19px !important; left: 100% !important; transform: translateX(-76%)}
+	.mobile_menu li ul.submenu li ul.submenu:before{content: none;}
+	
+	.mobile_menu li ul.submenu li a{color: #000; margin-bottom: 0;}
+	.mobile_menu li ul.submenu li ul.submenu li a{margin-bottom: 0;}
+
+	.mobile_menu li ul.submenu li ul.submenu li a:before{content: "\e900";}
+	.mobile_menu li ul.submenu li:has(ul.submenu)  a:before{content: "\e901";}
+}
+
+@media (min-width:  1800px) {
+	.mobile_menu li ul.submenu{top: 70px !important;}
+	.mobile_menu li ul.submenu li ul.submenu{display: none; top: 26px !important;}
+}
+
+
+/* Mobile first layout SmartMenus Core CSS (it's not recommended editing these rules)
+   You need this once per page no matter how many menu trees or different themes you use.
+-------------------------------------------------------------------------------------------*/
+
+.sm{box-sizing:border-box;position:relative;z-index:9999;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+.sm,.sm ul,.sm li{display:flex;list-style:none;margin:0 0 0 auto;padding:0;line-height:normal;direction:ltr;text-align:left;}
+.sm-rtl,.sm-rtl ul,.sm-rtl li{direction:rtl;text-align:right;}
+.sm>li>h1,.sm>li>h2,.sm>li>h3,.sm>li>h4,.sm>li>h5,.sm>li>h6{margin:0;padding:0;}
+.sm ul{display:none;}
+.sm li,.sm a{position:relative;}
+.sm a{display:block;}
+.sm a.disabled{cursor:default;}
+.sm::after{content:"";display:block;height:0;font:0px/0 serif;clear:both;overflow:hidden;}
+.sm *,.sm *::before,.sm *::after{box-sizing:inherit;}
