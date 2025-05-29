@@ -4,6 +4,11 @@ import { createClient } from "next-sanity";
 import 'fullpage.js/dist/fullpage.css';
 import { useEffect, useState } from "react";
 import Swiper from 'swiper';
+import { Navigation, Pagination, Autoplay, EffectFade, EffectCreative } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
 
 
 interface HomeProps {
@@ -31,6 +36,12 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
   const Lastword = words.length >= 2 ? words[2] + ' ' + words[3] + ' ' + words[4] : '';
 
   useEffect(() => {
+    // Only run on client
+    if (typeof window === 'undefined') return;
+
+    // Register Swiper modules
+    Swiper.use([Navigation, Pagination, Autoplay, EffectFade]);
+
     const script = document.createElement('script');
     script.src = "/js/fullpage.js";
     script.onload = () => {
@@ -83,36 +94,43 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
     document.body.appendChild(script);
 
      $('#navToggle').on('click',function(){
-        if($('.header').hasClass('mobNavActive')){
-          $('.header').removeClass('mobNavActive');
-          $('#overlayNav, #menu').removeClass('active');
-          $(this).removeClass('active');  
-
-        }else{
-          $('.header').addClass('mobNavActive');
-          $('#overlayNav, #menu').addClass('active');
-          
-        } 
-      });
-      $('#menu li a').on('click',function(){
-        $('#overlayNav, #navToggle, #menu').removeClass('active');
+      if($('.header').hasClass('mobNavActive')){
+        console.log('remove');
         $('.header').removeClass('mobNavActive');
-      });
+        $('#overlayNav').removeClass('active');
+        $(this).removeClass('active');
+
+      }else{
+        $('.header').addClass('mobNavActive');
+        $('#overlayNav').addClass('active');
+        $(this).addClass('active');
+      } 
+    });
+    $('#menu li a').on('click',function(){
+      $('#overlayNav, #navToggle, #menu').removeClass('active');
+      $('.header').removeClass('mobNavActive');
+    });
 
     const winHeight = window.innerHeight;
     const winWidth = window.innerWidth;
     if (winWidth > 766) {
-      const swiperCard = new Swiper(".swiperCards", {
+      const swiperCard = new Swiper('.swiperCards', {
+        modules: [Navigation, Pagination, Autoplay, EffectFade],
         loop: true,
         autoplay: {
           delay: 5000,
           disableOnInteraction: false
         },
         pagination: {
-          el: ".swiper-pagination",
+          el: '.swiper-pagination',
           clickable: true,
         },
-        effect: "fade",
+        effect: 'fade',
+        on: {
+          init: function () {
+            console.log('Swiper initialized');
+          }
+        }
       });
 
       const cardThumbList = document.querySelector(".CardsThumb");
@@ -128,11 +146,13 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
         cardThumbItems.forEach(function (item) {
           item.addEventListener("click", function () {
             const slideIndex = parseInt(item.getAttribute("data-slide-index") || "0", 10);
-            swiperCard.slideTo(slideIndex + 1);
+            // Since we're using loop: true, we need to account for the duplicate slides
+            swiperCard.slideToLoop(slideIndex);
           });
         });
 
         function updateActiveListItem() {
+          // Get the current slide index accounting for loop
           const activeSlideIndex = swiperCard.realIndex;
           cardThumbItems?.forEach(function (item) {
             const slideIndex = parseInt(item.getAttribute("data-slide-index") || "0", 10);
@@ -144,32 +164,21 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
           });
         }
 
+        // Update active state on slide change
         swiperCard.on('slideChange', updateActiveListItem);
+        // Also update on initialization
+        swiperCard.on('init', updateActiveListItem);
       }
 
-      function updateActiveListItem() {
-        const activeSlideIndex = swiperCard.realIndex;
-        cardThumbItems?.forEach(function (item) {
-          const slideIndex = parseInt(item.getAttribute("data-slide-index") || "0", 10);
-          if (slideIndex === activeSlideIndex) {
-            item.classList.add("active");
-          } else {
-            item.classList.remove("active");
-          }
-        });
-      }
-
-      swiperCard.on('slideChange', updateActiveListItem);
+     
     }
 
     const workSlider = document.querySelector('.workSlider');
     const workSliderThumbs = document.querySelector('.workSlider-thumbs');
 
-
-
     if (workSlider && workSliderThumbs) {
-      var swiper1 = new Swiper(workSlider as HTMLElement, {
-        //effect: 'slide',
+      const swiper1 = new Swiper(workSlider as HTMLElement, {
+        modules: [Navigation, Pagination, Autoplay, EffectFade],
         loop: true,
         grabCursor: true,
         centeredSlides: true,
@@ -226,7 +235,8 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
         },
       });
 
-      var thumbs = new Swiper(workSliderThumbs as HTMLElement, {
+      const thumbs = new Swiper(workSliderThumbs as HTMLElement, {
+        modules: [Navigation, Pagination, Autoplay, EffectFade],
         slidesPerView: 1.2,
         spaceBetween: 10,
         loop: true,
@@ -252,44 +262,57 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
       });
 
 
-      // swiper1.controller.control = thumbs;
-      // thumbs.controller.control = swiper1;
+      /*  if (swiper1 && thumbs) {
+         swiper1.controller.control = thumbs;
+         thumbs.controller.control = swiper1;
+       } */
     }
 
     // Initialize Swiper for thinkSlider
-    const thinkSlider = new Swiper('.thinkSlider', {
+    new Swiper('.thinkSlider', {
+      modules: [Navigation, Pagination, Autoplay, EffectFade, EffectCreative],
+      grabCursor: true,
+      spaceBetween: 0,
+      slidesPerView: 2,
+      speed:600,
       loop: true,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
+      autoplay:true,
+      centeredSlides: true,
+      effect: "creative",
+      creativeEffect: {
+        prev: {
+          shadow: true,
+          translate: ["-45%", 0, -250],
+        },
+        next: {
+          shadow: true,
+          translate: ["45%", 0, -250],
+        },
       },
       navigation: {
-        nextEl: '.swiperThink-next',
-        prevEl: '.swiperThink-prev',
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
       },
     });
 
-    const thinkThumbSlider = new Swiper('.thinkThumbSlider', {
-      slidesPerView: 3,
-      spaceBetween: 10,
-      centeredSlides: true,
-      slideToClickedSlide: true,
-      loop: true,
-      navigation: {
-        nextEl: '.swiperThink-next',
-        prevEl: '.swiperThink-prev',
-      },
+    new Swiper('.thinkThumbSlider', {
+        modules: [Navigation, Pagination, Autoplay, EffectFade],
+        slidesPerView: 2,
+        centeredSlides: true,
+        speed:600,
+        loop: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
     });
 
     //thinkSlider.controller.control = thinkThumbSlider;
     //thinkThumbSlider.controller.control = thinkSlider;
 
        // Initialize Swiper for contacSlider
-       const contacSlider = new Swiper('.contacSlider', {
+       new Swiper('.contacSlider', {
+        modules: [Navigation, Pagination, Autoplay, EffectFade],
         loop: true,
         autoplay: {
           delay: 5000,
@@ -335,7 +358,6 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
         <script src="js/wow.min.js"></script>
         <script src="js/swiper-bundle.min.js"></script>
         <script type="text/javascript" src="js/fullpage.js"></script>
-        <script type="text/javascript"></script>
       </Head>
 
       {
@@ -405,7 +427,7 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
               <div className="vidText fulHght">
                 <div className="container d-flex h-100 align-items-center">
                   <div className="row align-items-end justify-content-between">
-                    <div className="col-7"><h2>{banner[0]['title']}</h2></div>
+                    <div className="vid-tl"><h2>{banner[0]['title']}</h2></div>
                   </div>
                   <div className="dwn-arrow-btn bounceArrow">
                     <div className="arrowdwn-ico"></div>
@@ -424,8 +446,8 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
                         <span className="linetextRoll txtUnderLine">
                           <div className="rollerText">
                             <span>{section2[0]['subWords']}</span>
-                            <span>{section2[0]['rollsubWords2']}</span>
-                            <span>{section2[0]['rollsubWords3']}</span>
+                            <span>{section2[0]['subWords2']}</span> 
+                            <span>{section2[0]['subWords3']}</span>
                           </div>
                         </span>
                       </h2>
@@ -493,6 +515,7 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
 
                 </div>
               </div>
+              
               <div className="staticTxt">
                 <div className="container">
                   <div className="row"><h2>with an array of <span className="txtUnderLine wht">expertise</span></h2></div>
@@ -503,10 +526,10 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
                   <div className="row">
                     <div className="col-lg-12">
                       <ul className="CardsThumb">
-                        <li className="active"><a href="#">{expertise[0]['Tabtitle']}</a></li>
-                        <li><a href="#">{expertise[1]['Tabtitle']}</a></li>
-                        <li><a href="#">{expertise[2]['Tabtitle']}</a></li>
-                        <li><a href="#">{expertise[3]['Tabtitle']}</a></li>
+                        <li className="active"><a href="javascript:void(0);">{expertise[0]['Tabtitle']}</a></li>
+                        <li><a href="javascript:void(0);">{expertise[1]['Tabtitle']}</a></li>
+                        <li><a href="javascript:void(0);">{expertise[2]['Tabtitle']}</a></li>
+                        <li><a href="javascript:void(0);">{expertise[3]['Tabtitle']}</a></li>
                       </ul>
                     </div>
                   </div>
@@ -623,7 +646,6 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
                       <div className="swiper thinkThumbSlider">
                         <div className="swiper-wrapper">
                           {esgDriven[0]?.files.map((file: any, index: number) =>
-
                             <div className="swiper-slide" key={index}><span>{file.name}</span></div>
                           )}
 

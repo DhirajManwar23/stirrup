@@ -246,7 +246,7 @@ p { font-size: 26px; line-height: 1.2; font-weight: 100; font-family: 'ArchivoRe
 .header .navbar-brand{margin-right:0;}
 .header .navbar-brand .logoDiv{background: url("../images/logo-stirrup-black.svg") 0 0 no-repeat; background-size: contain; width: 120px; height: 35px; display: inline-block; vertical-align: middle; transition:.5s; }
 
-.header.headerWhite:before{background: rgba(0,0,0,0.30); transition:.5s;}
+.header.headerWhite:before{background: rgba(255,255,255,0.30); transition:.5s;}
 .header.headerWhite #menu li a{color: #fff; transition:.5s;}
 .header.headerWhite #menu li a:hover{color: #EF4C23; transition:.5s;}
 .header.headerWhite #menu li.active a:hover{color: #FFFFFF; transition:.5s;}
@@ -375,6 +375,8 @@ p { font-size: 26px; line-height: 1.2; font-weight: 100; font-family: 'ArchivoRe
 .banner-wrp #bnr-vid {width: 100%;height: 100vh;object-fit: cover; }
 .banVideoWrp .dwn-arrow-btn{bottom: 40px; left: 0%;}
 
+.banVideoWrp .vidText .vid-tl{ max-width: 750px;}
+
 
 
 .introWrp{ background: #fff; height: 100%; padding: 160px 0 80px 0; position: relative;}
@@ -403,7 +405,7 @@ p { font-size: 26px; line-height: 1.2; font-weight: 100; font-family: 'ArchivoRe
 .introWrp .callout-sml h2{margin-bottom: 5%;}
 .introWrp .callout-sml .rollerText {position: absolute; top: -18%; animation: slide2 8s infinite;}
 
-.introWrp .linetextRoll{height:63px;  overflow: hidden; position: relative; display: inline-flex;}
+.introWrp .linetextRoll{height:63px;  overflow: hidden; position: relative; display: inline-flex; margin-left: 20px;}
 .introWrp .linetextRoll .rollerText{position: relative;display: inline-flex; flex-direction: column; top: 0; animation: slide3 8s infinite;}
 .introWrp .linetextRoll .rollerText span{margin-bottom: 0;}
 
@@ -436,7 +438,7 @@ p { font-size: 26px; line-height: 1.2; font-weight: 100; font-family: 'ArchivoRe
 .CardsThumb{ margin: 0; padding: 0; display: flex;border-top: 1px solid rgba(255,255,255,1); padding: 0 30px;}
 .CardsThumb li{ flex: 0 25%;  padding-top: 15px;  font-family: 'ArchivoRegular';font-size: 22px;line-height: 1.2;font-weight: 100; text-transform: uppercase; border-right: 1px solid rgba(255,255,255,1); text-align: center;transition:all 0.5s ease-in-out;}
 .CardsThumb li:last-child{border-right: none;}
-.CardsThumb li a{ color:rgba(255,255,255,.3);transition:all 0.5s ease-in-out; text-align: left; display: inline-block;}
+.CardsThumb li a{ color:rgba(255,255,255,.3);transition:all 0.5s ease-in-out; text-align: left; display: inline-block; width: 95%; margin: 0 auto;}
 .CardsThumb li.active{/*border-bottom: 1px solid rgba(255,255,255,1);  */transition:all 0.5s ease-in-out;}
 .CardsThumb li.active a{color: rgba(255,255,255,1); transition:all 0.5s ease-in-out;}
 .swiperCards { width: 100%;}
@@ -681,7 +683,7 @@ p { font-size: 26px; line-height: 1.2; font-weight: 100; font-family: 'ArchivoRe
   .careerWrap .textIncrement{font-size: 210px;}
   
   .thinkingWrp .tagsDiv ul li{padding: 5px 15px; font-size: 14px;}
-  
+  .thinkingWrp h2{ font-size: 44px;}
   .btn-boxArrow{font-size: 24px;}
   .contactWrp .socialList li{padding: 15px 0;}
   .contactWrp .addWrp{padding: 30px 0;}
@@ -689,7 +691,8 @@ p { font-size: 26px; line-height: 1.2; font-weight: 100; font-family: 'ArchivoRe
   .contactWrp .addersPanel .location h3{font-size: 30px;}
   .contactWrp .addersPanel .addrsInfo p{font-size: 18px;}
   .icon-insta, .icon-linkin, .icon-twiter{width: 45px; height: 45px;}
-  
+  .banVideoWrp .vidText .vid-tl { max-width: 660px; }
+  .CardsThumb li a{ width: 86%;}
   .footerWrp p, .footerWrp ul li{font-size: 14px;}
 }
 
@@ -735,6 +738,7 @@ p { font-size: 26px; line-height: 1.2; font-weight: 100; font-family: 'ArchivoRe
   .btn-boxArrow{font-size: 19px;}
   .contactWrp .addersPanel .location h3{font-size: 24px;}
   .icon-insta, .icon-linkin, .icon-twiter{width: 34px;height: 34px;}
+  .banVideoWrp .vidText .vid-tl { max-width: 540px; }
 }
 
 @media(max-width:1200px){
@@ -765,7 +769,7 @@ p { font-size: 26px; line-height: 1.2; font-weight: 100; font-family: 'ArchivoRe
   .contactWrp .addersPanel .location{margin-bottom: 20px;}
   .contactWrp .addersPanel .location h3{margin-top: 10px;}
   .contactWrp .contacSlider{margin-top: 60%;}
-  
+  .banVideoWrp .vidText .vid-tl { max-width: 450px; }
 }
 
 @media(max-width:767px){
@@ -810,7 +814,7 @@ p { font-size: 26px; line-height: 1.2; font-weight: 100; font-family: 'ArchivoRe
   .careerWrap .copyDiv .btn-boxArrow{margin-top: 40px;}
   .imgRolWrp{height: auto; margin-bottom: 40px;}
   .careerWrap .marqeWrp{min-width: 100%; flex-direction: row;}
-  .careerWrap .marqeWrp .marqueList{min-width: 100%; flex-direction: row;animation: scroll 40s linear infinite}
+  .careerWrap .marqeWrp .marqueList{min-width: 100%; flex-direction: row;animation: scroll 10s linear infinite}
   .careerWrap{padding-bottom: 0;}
   .col-sm-none{display: none; visibility:hidden;}
   .contactWrp{padding-top: 100px;}
