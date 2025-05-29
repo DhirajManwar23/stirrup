@@ -287,8 +287,6 @@ background: linear-gradient(0deg, rgba(216,229,237,1) 0%, rgba(222,238,244,1) 5%
 	
 }
 
-
-
 @media (max-width:767px){
 	.swiper-banner .banCarsl-bulet-wrap{bottom: 5%;}
 	.swiper-banner .swiper-pagination-bullets.swiper-pagination-horizontal{margin-left: 0;}

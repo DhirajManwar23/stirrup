@@ -82,6 +82,23 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
     };
     document.body.appendChild(script);
 
+     $('#navToggle').on('click',function(){
+        if($('.header').hasClass('mobNavActive')){
+          $('.header').removeClass('mobNavActive');
+          $('#overlayNav, #menu').removeClass('active');
+          $(this).removeClass('active');  
+
+        }else{
+          $('.header').addClass('mobNavActive');
+          $('#overlayNav, #menu').addClass('active');
+          
+        } 
+      });
+      $('#menu li a').on('click',function(){
+        $('#overlayNav, #navToggle, #menu').removeClass('active');
+        $('.header').removeClass('mobNavActive');
+      });
+
     const winHeight = window.innerHeight;
     const winWidth = window.innerWidth;
     if (winWidth > 766) {
@@ -288,7 +305,7 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
         },
       });
 
-  
+     
   
   }, [hasAnimated]);
   return (
@@ -338,7 +355,11 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
           <div className="headerWrp">
             <div className="container">
               <div className="header headerWhite" id="header">
-                <nav className="navbar custom-toggler">
+                <nav className="navbar">
+                  <div className="custom-toggler mob-show" id="navToggle">
+                    <span></span>
+                    <span></span>
+                  </div>   
                   <ul id="menu" className="nav-links">
                     <li data-menuanchor="home" className="d-none">
                       <a href="#home">Home</a>
@@ -373,6 +394,7 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
               </div>
             </div>
           </div>
+          <div id="overlayNav"></div>
           <div id="fullpage">
             <div className="section banVideoWrp" id="section0">
               <div className="banner-wrp">
