@@ -114,65 +114,67 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
 
     const winHeight = window.innerHeight;
     const winWidth = window.innerWidth;
-    if (winWidth > 766) {
-      const swiperCard = new Swiper('.swiperCards', {
-        modules: [Navigation, Pagination, Autoplay, EffectFade],
-        loop: true,
-       /*  autoplay: {
-          delay: 5000,
-          disableOnInteraction: false
-        }, */
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        effect: 'fade',
-        on: {
-          init: function () {
-            console.log('Swiper initialized');
-          }
+    const swiperCard = new Swiper('.swiperCards', {
+      modules: [Navigation, Pagination, Autoplay, EffectFade],
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiperCard-button-next',
+        prevEl: '.swiperCard-button-prev',
+      },
+      effect: 'fade',
+      on: {
+        init: function () {
+          console.log('Swiper initialized');
         }
+      }
+    });
+    const cardThumbList = document.querySelector(".CardsThumb");
+    if (cardThumbList) {
+      const cardThumbItems = cardThumbList.querySelectorAll("li");
+      cardThumbItems.forEach(function (item, index) {
+        item.setAttribute("data-slide-index", index.toString());
+      });
+    }
+    let cardThumbItems: NodeListOf<HTMLLIElement> | null = null;
+    if (cardThumbList) {
+      cardThumbItems = cardThumbList.querySelectorAll("li");
+      cardThumbItems.forEach(function (item) {
+        item.addEventListener("click", function () {
+          const slideIndex = parseInt(item.getAttribute("data-slide-index") || "0", 10);
+          // Since we're using loop: true, we need to account for the duplicate slides
+          swiperCard.slideToLoop(slideIndex);
+        });
       });
 
-      const cardThumbList = document.querySelector(".CardsThumb");
-      if (cardThumbList) {
-        const cardThumbItems = cardThumbList.querySelectorAll("li");
-        cardThumbItems.forEach(function (item, index) {
-          item.setAttribute("data-slide-index", index.toString());
+      function updateActiveListItem() {
+        // Get the current slide index accounting for loop
+        const activeSlideIndex = swiperCard.realIndex;
+        cardThumbItems?.forEach(function (item) {
+          const slideIndex = parseInt(item.getAttribute("data-slide-index") || "0", 10);
+          if (slideIndex === activeSlideIndex) {
+            item.classList.add("active");
+          } else {
+            item.classList.remove("active");
+          }
         });
       }
-      let cardThumbItems: NodeListOf<HTMLLIElement> | null = null;
-      if (cardThumbList) {
-        cardThumbItems = cardThumbList.querySelectorAll("li");
-        cardThumbItems.forEach(function (item) {
-          item.addEventListener("click", function () {
-            const slideIndex = parseInt(item.getAttribute("data-slide-index") || "0", 10);
-            // Since we're using loop: true, we need to account for the duplicate slides
-            swiperCard.slideToLoop(slideIndex);
-          });
-        });
 
-        function updateActiveListItem() {
-          // Get the current slide index accounting for loop
-          const activeSlideIndex = swiperCard.realIndex;
-          cardThumbItems?.forEach(function (item) {
-            const slideIndex = parseInt(item.getAttribute("data-slide-index") || "0", 10);
-            if (slideIndex === activeSlideIndex) {
-              item.classList.add("active");
-            } else {
-              item.classList.remove("active");
-            }
-          });
-        }
-
-        // Update active state on slide change
-        swiperCard.on('slideChange', updateActiveListItem);
-        // Also update on initialization
-        swiperCard.on('init', updateActiveListItem);
-      }
+      // Update active state on slide change
+      swiperCard.on('slideChange', updateActiveListItem);
+      // Also update on initialization
+      swiperCard.on('init', updateActiveListItem);
+    }
 
      
-    }
+   
 
     const workSlider = document.querySelector('.workSlider');
     const workSliderThumbs = document.querySelector('.workSlider-thumbs');
@@ -329,7 +331,7 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
         },
       });
 
-      document.onmousemove = function(e) {
+     document.onmousemove = function(e) {
         document.body.style.setProperty("--x", e.clientX + "px");
         document.body.style.setProperty("--y", e.clientY + "px");
       };
@@ -501,8 +503,8 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
                                   <p>{item.description}</p>
                                 </div>
                                 <div className="tagsDiv">
-                                  <ul>
-                                    {item.tags && item.tags.map((tag: string, tagIndex: number) => (
+                                 <ul>
+                                    {item.tag && item.tag.map((tag: string, tagIndex: number) => (
                                       <li key={tagIndex}>{tag}</li>
                                     ))}
                                   </ul>
