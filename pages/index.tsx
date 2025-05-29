@@ -47,6 +47,7 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
     script.onload = () => {
       new (window as any).fullpage('#fullpage', {
         scrollBar: true,
+        responsiveWidth: 766,
         anchors: ['home', 'aboutUs', 'expertise', 'work', 'clients', 'thinking', 'careers', 'contact'],
         menu: '#menu',
         onLeave: function (origin: any, destination: any, direction: any, trigger: any) {
@@ -117,10 +118,10 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
       const swiperCard = new Swiper('.swiperCards', {
         modules: [Navigation, Pagination, Autoplay, EffectFade],
         loop: true,
-        autoplay: {
+       /*  autoplay: {
           delay: 5000,
           disableOnInteraction: false
-        },
+        }, */
         pagination: {
           el: '.swiper-pagination',
           clickable: true,
@@ -328,7 +329,10 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
         },
       });
 
-     
+      document.onmousemove = function(e) {
+        document.body.style.setProperty("--x", e.clientX + "px");
+        document.body.style.setProperty("--y", e.clientY + "px");
+      };
   
   }, [hasAnimated]);
   return (
@@ -511,7 +515,8 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
                     </div>
                   ))}
 
-
+                  <div className="swiperCard-button-prev"></div>
+                  <div className="swiperCard-button-next"></div>
 
                 </div>
               </div>

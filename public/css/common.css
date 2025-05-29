@@ -774,7 +774,7 @@ p { font-size: 26px; line-height: 1.2; font-weight: 100; font-family: 'ArchivoRe
 
 @media(max-width:767px){
   
-  h2{font-size: 32px;}
+  h2{font-size: 30px;}
   p{font-size: 18px;}
   
   .bounceArrow{display: none;}
