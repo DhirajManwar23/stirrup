@@ -832,9 +832,14 @@ p { font-size: 26px; line-height: 1.2; font-weight: 100; font-family: 'ArchivoRe
     }
     .clientWrp .staticTxt {
     margin-bottom: 0;
-}
+  }
+      .careerWrap .marqeWrp {
+        min-width: 100%;
+        flex-direction: row;
+    }
   .clientWrp h2{line-height: 1.3;}
-  .workWrp .workSliderWrp{ margin-bottom: 20px; }
+  .workWrp .workSliderWrp{ margin-bottom: 20px; } 
+  .imgRolWrp:before{ height: 2%; }
 }
 
 

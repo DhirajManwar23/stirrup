@@ -100,11 +100,12 @@ export default function Home({ Loadword, Navbar, banner, videoUrl, section2, exp
         $('.header').removeClass('mobNavActive');
         $('#overlayNav').removeClass('active');
         $(this).removeClass('active');
-
+        $('#menu').removeClass('active');
       }else{
         $('.header').addClass('mobNavActive');
         $('#overlayNav').addClass('active');
         $(this).addClass('active');
+        $('#menu').addClass('active');
       } 
     });
     $('#menu li a').on('click',function(){
